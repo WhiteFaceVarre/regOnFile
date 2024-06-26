@@ -1,0 +1,24 @@
+body {
+    margin: 0%;
+    padding: 0%;
+}
+h2 {
+    margin-top: 5%;
+    text-align: center;
+}
+form {
+    text-align: end;
+    padding: 2%;
+    padding-right: 5%;
+    margin-right: 39%;
+}
+label {
+    margin: 1%;
+}
+input {
+    margin: 7px;
+}
+.sign_up {
+    margin: 12px;
+    margin-right: 25px;
+}
