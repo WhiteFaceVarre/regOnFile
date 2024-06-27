@@ -22,3 +22,6 @@ input {
     margin: 12px;
     margin-right: 25px;
 }
+.errors_div {
+    border: solid black 2px;
+}
