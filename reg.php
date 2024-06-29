@@ -5,7 +5,7 @@ session_start();
 $errors = [];
 //Фамилия
 if (isset($_POST['user_sur_name'])) {
-    $userSurname = $_POST['user_name'];
+    $userSurname = $_POST['user_sur_name'];
     if (!preg_match('/^[а-яёА-ЯЁ\s]+$/u', $userSurname)) {
         $user_surname_char_err = "Некорректная фамилия: Фамилия должна содержать только русские буквы, без символов.";
         array_push($errors, $user_surname_char_err);
@@ -29,9 +29,9 @@ else {
 }
 //Отчество
 if (isset($_POST['user_father_name'])) {
-    $userFatherName = $_POST['user_name'];
+    $userFatherName = $_POST['user_father_name'];
     if (!preg_match('/^[а-яёА-ЯЁ\s]+$/u', $userFatherName)) {
-        $user_father_name_char_err = "Некорректное имя: Имя должно содержать только русские буквы, без символов.";
+        $user_father_name_char_err = "Некорректное отчество: Отчество должно содержать только русские буквы, без символов.";
         array_push($errors, $user_father_name_char_err);
     }
 }
@@ -81,11 +81,20 @@ if (count($errors) !== 0) {
 }
 else {
     $document_lines = file("./db/users.txt");          
-    $lastUser = end($document_lines);           
-    preg_match('/ID:\s*(\d+)\b/', $lastUser, $lastUserId);         
-    $currentUserId = (int)$lastUserId[1] + 1;
-                    
-    $user_data = PHP_EOL . 'ID: ' . $currentUserId . ' | Name: ' . $userName . ' | Phone Number: ' . $phoneNumber . ' | Email: ' . $email . ' | Password: ' . $password_crypt;           
+    
+    if (empty($document_lines[0])) {
+        $first_line_data = "ID | Surname | Name | Fathername | Phone Number | EMail | Password";
+        file_put_contents("./db/users.txt", $first_line_data, FILE_APPEND);
+    }         
+    if (empty($document_lines[1])) {
+        $user_id = 0;
+    }
+    else {
+        $lastUser = end($document_lines);           
+        preg_match('/ID:\s*(\d+)\b/', $lastUser, $lastUserId);         
+        $user_id = (int)$lastUserId[1] + 1;
+    }            
+    $user_data = PHP_EOL . $user_id . " | " . $userSurname . " | " . $userName . " | " . $userFatherName . " | " . $phoneNumber . " | " . $email . " | " . $password_crypt;           
     file_put_contents("./db/users.txt", $user_data, FILE_APPEND);
 }
 

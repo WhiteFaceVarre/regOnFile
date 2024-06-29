@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+    session_start(); 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,14 +40,22 @@
         <input class="sign_up" type="submit" value="Зарегистрироваться">
     </form>
 
+    <?php
+    
+        if(isset($_SESSION['errors'])) {
+    ?>
+
     <div class="errors_div">
         <br><h2>Ошибка регистрации</h2><br>
         <?php
-        for($i = 0; $i < count($_SESSION['errors']); $i++) {
-            echo $_SESSION['errors'][$i];
-        }
+            for($i = 0; $i < count($_SESSION['errors']); $i++) {
+                echo $_SESSION['errors'][$i] . "<br>";
+            }
         ?>
     </div>
 
+    <?php
+        }
+    ?>
 </body>
 </html>
