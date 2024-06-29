@@ -40,8 +40,8 @@
     <div class="errors_div">
         <br><h2>Ошибка регистрации</h2><br>
         <?php
-        foreach($_SESSION['errors'] as $value) {
-            echo $value . "<br>";
+        for($i = 0; $i < count($_SESSION['errors']); $i++) {
+            echo $_SESSION['errors'][$i];
         }
         ?>
     </div>
