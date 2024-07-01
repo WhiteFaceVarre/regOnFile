@@ -1,18 +1,15 @@
-<?php 
-    session_start(); 
-?>
-
+<?php session_start(); ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Регистрация</title>
     <link rel="stylesheet" href="./styles/reg.css">
 </head>
 <h2>Регистрация</h2>
 <body>
-    <form action="../reg.php" method="post">
+    <form action="../registration.php" method="post">
         <label for="user_sur_name">Фамилия:
             <input type="text" name="user_sur_name"><br>
         </label>
@@ -39,23 +36,17 @@
         <br>
         <input class="sign_up" type="submit" value="Зарегистрироваться">
     </form>
-
-    <?php
-    
-        if(isset($_SESSION['errors'])) {
-    ?>
+    <a href="../views/auth.php">Есть аккаунт? Войти!</a>
 
     <div class="errors_div">
         <br><h2>Ошибка регистрации</h2><br>
         <?php
-            for($i = 0; $i < count($_SESSION['errors']); $i++) {
-                echo $_SESSION['errors'][$i] . "<br>";
-            }
+        foreach($_SESSION['errors'] as $value) {
+            echo $value . "<br>";
+        }
+        unset($_SESSION['errors']);
         ?>
     </div>
 
-    <?php
-        }
-    ?>
 </body>
 </html>
